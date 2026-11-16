@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Inkwell — a place to write, read and discuss ideas.">
+  <title>{% block title %}Inkwell{% endblock %} · Inkwell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="{{ url_for('index') }}"><span class="brand-mark">i.</span><span>inkwell<small>WRITE. READ. CONNECT.</small></span></a>
+  <nav>
+    <a href="{{ url_for('index') }}">Explore</a>
+    {% if current_user.is_authenticated %}
+      <a class="nav-cta" href="{{ url_for('new_post') }}">＋ Write a post</a>
+      <span class="nav-user">Hi, {{ current_user.username }}</span>
+      <form class="inline" method="post" action="{{ url_for('logout') }}"><button class="link-button">Sign out</button></form>
+    {% else %}
+      <a href="{{ url_for('login') }}">Sign in</a><a class="nav-cta" href="{{ url_for('register') }}">Create account</a>
+    {% endif %}
+  </nav>
+</header>
+<main class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}<section class="alerts">{% for category, message in messages %}<div class="alert {{ category }}">{{ message }}</div>{% endfor %}</section>{% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<footer>© {{ current_year }} Inkwell <span>Made for curious minds.</span></footer>
+</body></html>

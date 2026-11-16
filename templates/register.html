@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block title %}Create account{% endblock %}{% block content %}
+<section class="auth-wrap"><div class="auth-intro"><p class="eyebrow">JOIN THE COMMUNITY</p><h1>Give your ideas<br><em>a home.</em></h1><p>Create an account to share your perspective with the world.</p></div>
+<form class="form-card" method="post"><h2>Create account</h2><label>Username<input name="username" required minlength="3" maxlength="40" autocomplete="username" placeholder="At least 3 characters"></label><label>Email<input type="email" name="email" required autocomplete="email" placeholder="you@example.com"></label><label>Password<input type="password" name="password" required minlength="8" autocomplete="new-password" placeholder="At least 8 characters"></label><button class="button primary full">Create account</button><p class="form-foot">Already a member? <a href="{{ url_for('login') }}">Sign in</a></p></form></section>
+{% endblock %}
